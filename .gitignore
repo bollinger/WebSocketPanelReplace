@@ -1,3 +1,5 @@
 target/
 .idea/
-style-bug.iml
+project/target
+project/project/target
+
