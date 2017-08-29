@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0"
+  metadata-complete="true"  
+>
+
+
+
+<!--
+    <listener>
+        <description>StartupListener</description>
+        <listener-class>com.starjar.web.StartupListener</listener-class>
+    </listener>
+
+    <listener>
+        <description>SessionListener</description>
+        <listener-class>com.starjar.web.SessionListener</listener-class>
+    </listener>
+-->
+
+
+    <listener>
+        <listener-class>com.starjar.MyGuiceServletConfig</listener-class>
+    </listener>
+
+
+    <listener>
+        <listener-class>
+            org.apache.commons.fileupload.servlet.FileCleanerCleanup
+        </listener-class>
+    </listener>
+
+
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+
+
+
+
+    <resource-ref>
+        <description>Starjar Server Manager Datasouce Connection</description>
+        <res-ref-name>jdbc/StarjarServerManagerDS</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+
+<!--
+
+NOT NEEDED AS THIS WILL ALWAYS BE SERVER Behind Nginx.
+http port will be fire walled
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>all</web-resource-name>
+            <url-pattern>/protected/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+-->
+
+    <error-page>
+        <location>/error</location>
+    </error-page>
+
+
+
+    <session-config>
+        <session-timeout>
+            60
+        </session-timeout>
+    </session-config>
+
+
+</web-app>

@@ -1,0 +1,9 @@
+
+
+/** Row header sort */
+.sorted_asc:after {
+  content: "  ↓";
+}
+.sorted_desc:after {
+  content: " ↑";
+}
